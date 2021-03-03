@@ -1,0 +1,39 @@
+tower:
+  trustedEmails:
+    - '*@seqera.io'
+    - '*@salenda.es'
+---
+micronaut:
+  server:
+    cors:
+      enabled: true
+---
+dataSource:
+  pooled: true
+  dbCreate: "${DB_CREATE:update}"
+  url: "jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/tower"
+  driverClassName: "${DB_DRIVER:com.mysql.cj.jdbc.Driver}"
+  username: "${DB_USER:tower}"
+  password: "${DB_PASSWORD:tower}"
+hibernate:
+  dialect: "${DB_DIALECT:org.hibernate.dialect.MySQL55Dialect}"
+---
+mail:
+  from: noreply@salenda.net
+  to: qa@salenda.es
+  smtp:
+    host: smtp.salenda.es
+    port: 25
+    auth: false
+    user:
+    password:
+    starttls:
+      enable: false
+      required: false
+---
+tower:
+  serverUrl: http://localhost:4200
+---
+auth:
+  mail:
+    duration: 1d

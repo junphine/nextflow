@@ -1,0 +1,47 @@
+@import "./src/assets/variables";
+
+
+.spinner-border {
+  color: $clr-running;
+  font-size: 1.1rem;
+  width: 2.9rem;
+  height: 2.9rem;
+  animation-duration: $run-spin-duration;
+}
+
+.workflow-status {
+  vertical-align: text-top;
+
+  &.succeed {
+    color: $clr-succeed;
+  }
+
+  &.failed {
+    color: $clr-failed;
+  }
+
+  &.failed {
+    color: $clr-failed;
+  }
+
+  &.partial {
+    color: $clr-partial;
+  }
+
+  &.submitted {
+    color: $clr-submitted;
+  }
+}
+
+.status-icon {
+  font-size: 3.5rem;
+}
+
+.live-off {
+  color: $clr-failed;
+}
+
+.mdi-loading.mdi-spin.submitted::before {
+  animation-duration: $submit-spin-duration;
+  animation-direction: reverse;
+}

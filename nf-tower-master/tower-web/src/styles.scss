@@ -1,0 +1,396 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@include mat-core();
+$tower-web-primary: mat-palette($mat-indigo);
+$tower-web-accent: mat-palette($mat-pink, A200, A100, A400);
+$tower-web-warn: mat-palette($mat-red);
+$tower-web-theme: mat-light-theme($tower-web-primary, $tower-web-accent, $tower-web-warn);
+@include angular-material-theme($tower-web-theme);
+
+@import "./src/assets/variables";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+html {
+  font-size: $font-size-root;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background-color: $body-background;
+}
+
+pre, code, samp {
+  font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
+code {
+  color: #343a40!important;
+  background-color: #f8f9fa!important;
+  padding: 4px 6px;
+  border-radius: 2px;
+}
+
+small {
+  font-size: 90%;
+}
+
+#navbar {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
+  width: 100vw;
+}
+
+.navbar-brand {
+  max-width: calc(100% - 60px);
+  margin-right: 0;
+  overflow: hidden;
+}
+.navbar-brand img {
+  height: 40px;
+}
+
+#layout {
+  min-height: calc(100% - #{$navbar-height} - #{$footer-padding});
+}
+
+#sidebar {
+  position: fixed;
+  top: $navbar-height;
+  bottom: 0;
+  z-index: 2;
+  background-color: $sidebar-background;
+  border-right: $sidebar-border;
+}
+
+#central {
+  min-width: 200px;
+  padding-top: $navbar-height;
+  width: 100%;
+
+  &.sidebarNotCollapsed {
+    width: calc(100% - #{$sidebar-width});
+    margin-left: #{$sidebar-width};
+  }
+
+  &.sidebarCollapsed {
+    width: calc(100% - #{$sidebar-collapsed-width});
+    margin-left: #{$sidebar-collapsed-width};
+  }
+}
+// On small screens, allow the content to spread offscreen
+@media (max-width: 576px) {
+  #layout {
+    overflow-x: hidden;
+  }
+}
+
+#notification-container {
+  position: absolute;
+  top: calc(#{$navbar-height} + 2px);
+  right: 0;
+  z-index: 1051;
+}
+
+/* callout styles */
+
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem;
+}
+
+.bd-callout-primary {
+    border-left-color: #007bff;
+ }
+
+.bd-callout-secondary {
+    border-left-color: #6c757d;
+}
+
+.bd-callout-success {
+    border-left-color: #28a745;
+}
+
+.bd-callout-warning {
+    border-left-color: #ffc107;
+}
+
+.bd-callout-danger {
+    border-left-color: #dc3545;
+}
+
+.bd-callout-info {
+    border-left-color: #17a2b8;
+}
+
+.bd-callout-light {
+    border-left-color: #f8f9fa;
+}
+
+.bd-callout-dark {
+    border-left-color: #343a40;
+}
+
+.bd-callout-white {
+    border-left-color: #fff;
+}
+
+/* Chartist styles */
+.ct-slice-donut {
+  stroke-width: 20px !important;
+}
+
+.ct-filled .ct-slice-donut {
+  stroke: $clr-running;
+}
+
+.ct-empty .ct-slice-donut {
+  stroke: #d2d4d6;
+}
+
+.ct-label {
+  font-size: 1.25rem !important;
+  stroke: black;
+  fill: black !important;
+  color: black !important;
+}
+
+/* Task DataTable styles */
+#tasks-table-wrapper {
+
+  .inline {
+    padding: .2rem .4rem;
+    color: #bd4147;
+    background-color: #f8f9fa;
+    border-radius: .25rem
+  }
+
+  .dataTables_filter {
+    float: left;
+  }
+
+  .dataTables_filter input {
+    width: 100%;
+    @media (min-width: 576px){
+      width: 30rem;
+    }
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+  }
+
+  .dataTables_scrollBody {
+    overflow-y: hidden !important;
+  }
+
+  td {
+    cursor: pointer;
+  }
+
+  .details-table {
+    margin-left: 1em;
+    table-layout: fixed;
+
+    div.scrollable {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+    }
+  }
+
+  .details-row {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      padding-bottom: 5px;
+      text-indent: 0;
+    }
+
+    .details-row-title {
+      display: inline-block;
+      min-width: 75px;
+      font-weight: bold;
+    }
+  }
+
+  .badge-pill {
+    color: #fff;
+    border-radius: 0.3em;
+    padding-top: 0.3em;
+    padding-bottom: 0.4em;
+
+    &.NEW {
+      background-color: $clr-pending;
+    }
+    &.SUBMITTED {
+      background-color: $clr-submitted;
+    }
+    &.RUNNING {
+      background-color: $clr-running;
+    }
+    &.CACHED {
+      background-color: $clr-cached;
+    }
+    &.COMPLETED {
+      background-color: $clr-succeed;
+    }
+    &.FAILED {
+      background-color: $clr-failed;
+    }
+    &.ABORTED {
+      background-color: $clr-aborted;
+    }
+  }
+}
+
+
+.tree-list {
+  ul {
+    padding-inline-start: 1.5em;
+  }
+
+  li {
+    list-style: none;
+    white-space: nowrap;
+  }
+
+  .list-label {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .list-value {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+}
+
+footer {
+  z-index: 5;
+  position: relative;
+  background-color: $body-background;
+  font-size: smaller;
+  text-align: center;
+  padding-top: $footer-padding;
+
+  a {
+    color: inherit;
+  }
+
+  img {
+    height: 28px;
+    position: relative;
+    top: -7px;
+    opacity: 0.6;
+  }
+
+  @media (min-width: 540px) {
+    .col-sm {
+      text-align: left;
+    }
+    .footer-rhs-col {
+        text-align: right;
+    }
+  }
+}
+
+// patch tooltip flicking -- https://github.com/valor-software/ngx-bootstrap/issues/3075#issuecomment-363461060
+.tooltip {
+  pointer-events: none;
+}
+
+.form-control::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+.ng-touched.ng-invalid {
+  @extend .is-invalid;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.cdk-overlay-container {
+  z-index: 9999 !important;
+}
+
+::-webkit-input-placeholder {
+  font-style: italic;
+  color: #6c757d !important;
+  opacity: 1;
+}
+
+.dropdown-item:active, .mat-option:active span {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.mat-autocomplete-panel {
+  border-radius: 0.25rem !important;
+  padding: 0.5rem 0 !important;
+
+  .mat-option {
+    height: 28px !important;
+    padding: 0 !important;
+
+    &:hover {
+      background-color: #f8f9fa !important;
+    }
+
+    &:active {
+      background-color: #007bff !important;
+    }
+
+    .mat-option-text {
+      padding: 0.25rem 1.5rem !important;
+      font-size: 1rem;
+    }
+  }
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
+
+.button-spinner {
+  display: inline-block;
+
+  &::before {
+    animation-duration: $run-spin-duration;
+  }
+}
+
+@keyframes loading-dots {
+  0%, 20% {
+    color: rgba(0,0,0,0);
+    text-shadow:
+      .25em 0 0 rgba(0,0,0,0),
+      .5em 0 0 rgba(0,0,0,0);}
+  40% {
+    color: white;
+    text-shadow:
+      .25em 0 0 rgba(0,0,0,0),
+      .5em 0 0 rgba(0,0,0,0);}
+  60% {
+    text-shadow:
+      .25em 0 0 white,
+      .5em 0 0 rgba(0,0,0,0);}
+  80%, 100% {
+    text-shadow:
+      .25em 0 0 white,
+      .5em 0 0 white;}
+}

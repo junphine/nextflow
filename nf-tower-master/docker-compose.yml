@@ -1,0 +1,26 @@
+version: "3"
+services:
+
+  backend:
+    image: tower-backend
+    networks:
+      - frontend
+      - backend
+    ports:
+      - 8080:8080
+    volumes:
+      - $PWD:/work
+    working_dir: /work
+
+  frontend:
+    build: ./tower-web
+    networks:
+      - frontend
+    ports:
+      - 8000:80
+    depends_on:
+      - backend
+
+networks:
+  frontend: {}
+  backend: {}

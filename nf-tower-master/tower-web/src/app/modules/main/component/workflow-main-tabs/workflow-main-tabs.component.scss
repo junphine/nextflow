@@ -1,0 +1,52 @@
+@import "~src/assets/variables";
+
+.nav-tabs {
+  .nav-link {
+    color: #555;
+  }
+  .nav-link.active {
+    font-weight: 600;
+    color: #212529;
+  }
+}
+
+.card-body {
+  padding-bottom: 1px;
+}
+
+.tab-pane {
+  min-height: 150px;
+}
+
+.command-line-box {
+  display: inline-block;
+  width: 100%;
+  min-height: 100px;
+  white-space: pre-wrap;
+  padding: 1em 0 0 0;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+pre.tab-config {
+  color: inherit;
+  font-size: inherit;
+}
+
+.tab-max-height {
+  padding: 1em;
+  max-height: 25rem;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1000px;
+  }
+}
+
+@media (min-width: 1650px) {
+  .container {
+    max-width: 1140px;
+  }
+}

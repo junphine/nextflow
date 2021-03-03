@@ -1,0 +1,62 @@
+<div class="container mt-3"><div class="row justify-content-center"><div class="col-lg-10 col-xl-8">
+
+  <div class="card">
+    <div class="card-header">
+      Get started
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Welcome in Nextflow Tower</h5>
+      <p class="card-text">
+        Nextflow Tower allows you to monitor the execution of any of your Nextflow data analysis pipelines.
+      </p>
+
+      <div class='bd-callout bd-callout-success'>
+        <h5>1. Install Nextflow</h5>
+          <p>
+            If you don't have it already install Nextflow as usual:
+          </p>
+          <pre class="p-3 bg-light text-dark">curl https://get.nextflow.io | bash</pre>
+
+          <p>
+          Finalise the installation copying the <code>nextflow</code> launcher in a directory in
+            your <code>$PATH</code>.
+          </p>
+      </div>
+
+      <div class='bd-callout bd-callout-success'>
+      <h5>2. Set the access token</h5>
+        <p>
+        Define the following environment variable in your environment:
+        </p>
+        <pre class="p-3 bg-light text-dark">
+export TOWER_ACCESS_TOKEN={{accessToken}}
+export NXF_VER=20.04.1 </pre>
+      </div>
+
+      <div class='bd-callout bd-callout-success'>
+        <h5>3. Run Nextflow</h5>
+        <p>
+          Launch nextflow as usual adding the -with-tower command line option:
+        </p>
+        <pre class="p-3 bg-light text-dark">{{nextflowRunCommand}}</pre>
+      </div>
+
+      <div class='bd-callout bd-callout-success'>
+        <h5>Enjoy it</h5>
+        <p>
+          The pipeline execution will popup here!
+        </p>
+      </div>
+
+      <div class='bd-callout bd-callout-secondary'>
+        <h5>Tip</h5>
+        <p>
+          You can also add Tower access credentials in your Nextflow configuration
+          file using the following snippet:
+        </p>
+        <pre class="p-3 bg-light text-dark">{{nextflowConfig}}</pre>
+      </div>
+    </div>
+  </div>
+
+</div></div></div>

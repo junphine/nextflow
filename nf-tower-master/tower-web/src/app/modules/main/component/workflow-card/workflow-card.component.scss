@@ -1,0 +1,137 @@
+@import "./src/assets/variables";
+
+.card {
+  cursor: pointer;
+  border-left: solid 3px;
+  border-radius: 2px;
+  border-top: 1px solid #f0f0f0;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 0 0 0 3px;
+  width: $sidebar-width - 1rem; // Sidebar has px-2
+
+  :hover, :active, :focus {
+    background-color: #faf9f2;
+  }
+
+  &.active {
+    border-left-width: 6px;
+    padding-left: 0;
+  }
+
+  &.collapsed {
+    width: auto;
+
+    // Stronger colour for a smaller area
+    :hover {
+      background-color: #fcf8de;
+    }
+  }
+
+  &.active {
+    border-left-width: 6px;
+    padding-left: 0;
+  }
+
+  p {
+    font-size: 0.9em;
+  }
+
+  .card-content {
+    margin-right: 2rem;
+  }
+
+  .sidebar-wf-icon {
+    line-height: 1;
+  }
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.workflow--submitted {
+  border-left-color: $clr-submitted;
+
+  &.active {
+    border-color: $clr-submitted;
+  }
+
+  .card-title, .sidebar-wf-icon {
+    color: $clr-submitted;
+  }
+
+  .mdi-loading.mdi-spin::before {
+    animation-duration: $submit-spin-duration;
+    animation-direction: reverse;
+  }
+}
+
+.workflow--succeed {
+  border-left-color: $clr-succeed;
+
+  &.active {
+    border-color: $clr-succeed;
+  }
+
+  .card-title, .sidebar-wf-icon {
+    color: $clr-succeed;
+  }
+}
+
+.workflow--running {
+  border-left-color: $clr-running;
+
+  &.active {
+    border-color: $clr-running;
+  }
+
+  .card-title, .sidebar-wf-icon {
+    color: $clr-running;
+  }
+
+  .mdi-loading.mdi-spin::before {
+    animation-duration: $run-spin-duration;
+  }
+}
+
+.workflow--failed {
+  border-left-color: $clr-failed;
+
+  &.active {
+    border-color: $clr-failed;
+  }
+
+  .card-title, .sidebar-wf-icon {
+    color: $clr-failed;
+  }
+}
+
+.workflow--partial {
+  border-left-color: $clr-partial;
+
+  &.active {
+    border-color: $clr-partial;
+  }
+
+  .card-title, .sidebar-wf-icon {
+    color: $clr-partial;
+  }
+}
+
+.workflow--unknown {
+  border-left-color: $clr-failed;
+
+  &.active {
+    border-color: $clr-failed;
+  }
+
+  .card-title, .sidebar-wf-icon {
+    color: $clr-failed;
+  }
+}
+
+div.btn-delete {
+  position: relative;
+  button { position: absolute; right: 0; bottom: 0; }
+}

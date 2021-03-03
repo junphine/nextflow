@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright (c) 2019, Seqera Labs.
+  ~
+  ~ This Source Code Form is subject to the terms of the Mozilla Public
+  ~ License, v. 2.0. If a copy of the MPL was not distributed with this
+  ~ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  ~
+  ~ This Source Code Form is "Incompatible With Secondary Licenses", as
+  ~ defined by the Mozilla Public License, v. 2.0.
+  -->
+
+<div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">
+    Workflow execution completed unsuccessfully
+  </h4>
+  <hr>
+  <p>
+    The exit status of the task that caused the workflow execution to fail was: <code>{{workflow.exitStatus}}</code>
+  </p>
+  <p>The full error message is reported below:
+    <button class="btn btn-sm btn-outline-danger ml-3" type="button" data-toggle="collapse" data-target="#wf-err-msg" aria-expanded="true" >
+       <span class="mdi mdi-arrow-collapse"></span>
+       Collapse
+    </button>
+  </p>
+  <div id="wf-err-msg" class="collapse show">
+    <pre>{{workflow.data.errorReport}}</pre>
+  </div>
+</div>

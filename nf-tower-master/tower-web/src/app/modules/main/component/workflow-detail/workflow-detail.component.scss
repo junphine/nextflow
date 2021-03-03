@@ -1,0 +1,56 @@
+@import "./src/assets/variables";
+
+
+.tw-workflow > .card {
+  border-top: solid 7px;
+  border-radius: 2px;
+  border-left: 0;
+  border-right: 0;
+
+  &.submitted {
+    border-top-color: $clr-submitted;
+  }
+
+  &.running {
+    border-top-color: $clr-running;
+  }
+
+  &.succeed {
+    border-top-color: $clr-succeed;
+  }
+
+  &.failed {
+    border-top-color: $clr-failed;
+  }
+
+  &.partial {
+    border-top-color: $clr-partial;
+  }
+
+  // Full width page content on tiny screens
+  @media screen and (max-width: 576px) {
+    .card-body {
+      padding-left: 0;
+      padding-right: 0;
+
+      .card, .alert {
+        border-radius: 0;
+      }
+    }
+  }
+
+}
+
+.project-name {
+  color: black;
+}
+
+.project-name:hover {
+  text-decoration: underline;
+}
+
+.error-report {
+  padding: 15px;
+  white-space: pre-wrap;
+  background-color: #fdddcf;
+}

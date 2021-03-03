@@ -1,0 +1,83 @@
+#
+# configuration used for dockerized dev environment
+#
+micronaut:
+  server:
+    port: 8080
+  io:
+    watch:
+      paths: src/main
+      restart: true
+---
+tower:
+  contactEmail: paolo.ditommaso+tower@gmail.com
+  admin:
+    password: secret
+  trustedEmails:
+    - '*@seqera.io'
+    - 'paolo.ditommaso@gmail.com'
+  trace:
+    timeout: 90s
+  cron:
+    enabled: true
+    workflow-delete:
+      enabled: false
+    cloud-prices:
+      enabled: false
+  costs:
+    local:
+      costPerCpuHour: 1
+---
+dataSource:
+  pooled: false
+  dbCreate: update
+  url: jdbc:h2:file:../.db/h2/tower
+  driverClassName: org.h2.Driver
+  username: sa
+  password: ""
+hibernate:
+  show_sql: false
+  cache:
+    queries: false
+    use_second_level_cache: false
+    use_query_cache: false
+  dialect: org.hibernate.dialect.H2Dialect
+  naming_strategy: io.seqera.util.H8NamingStrategy
+grails:
+  gorm:
+    failOnError: false
+---
+mail:
+  from: "paolo.ditommaso+tower@gmail.com"
+  smtp:
+    host: email-smtp.eu-west-1.amazonaws.com
+    port: 587
+    auth: true
+    user: "${TOWER_SMTP_USER:`missing smtp user`}"
+    password: "${TOWER_SMTP_PASSWORD:`missing smtp password`}"
+    starttls:
+      enable: true
+      required: true
+---
+endpoints:
+  bean:
+    enabled: true
+  info:
+    enabled: true
+  metrics:
+    enabled: true
+  caches:
+    enabled: true
+  refresh:
+    enabled: true
+  loggers:
+    enabled: true
+  mailer:
+    enabled: true
+  health:
+    disk-space:
+      enabled: true
+      path: '/'
+      threshold: '500MB'
+    jdbc:
+      enabled: true
