@@ -18,6 +18,7 @@
 
 apply plugin: 'groovy'
 
+
 sourceSets {
     main.java.srcDirs = []
     main.groovy.srcDirs = ['src/main']
@@ -43,3 +44,14 @@ dependencies {
     testImplementation(testFixtures(project(":nextflow")))
 }
 
+publishing {
+	publications {
+		maven(MavenPublication) {
+			groupId = group
+			//artifactId = 'nf-httpfs'
+			version = version
+
+			from components.java
+		}
+	}
+}

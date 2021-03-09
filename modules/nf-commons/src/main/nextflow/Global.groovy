@@ -24,7 +24,7 @@ import groovy.util.logging.Slf4j
 import nextflow.util.Duration
 import nextflow.util.IniFile
 import nextflow.util.MemoryUnit
-import org.apache.commons.lang.StringUtils
+import org.apache.commons.lang3.StringUtils
 /**
  * Hold global variables
  *

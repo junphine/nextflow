@@ -233,11 +233,18 @@ class CmdRun extends CmdBase implements HubOptions {
 
     @Override
     String getName() { NAME }
+	
+	@Override
+	void run() {
+		final scriptArgs = (args?.size()>1 ? args[1..-1] : []) as List<String>
+		final pipeline = stdin ? '-' : ( args ? args[0] : null )
+		ScriptRunner runner = runJob(pipeline,scriptArgs);
+		 // -- run it!
+        runner.execute(scriptArgs, this.entryName)
+	}
 
-    @Override
-    void run() {
-        final scriptArgs = (args?.size()>1 ? args[1..-1] : []) as List<String>
-        final pipeline = stdin ? '-' : ( args ? args[0] : null )
+    
+    ScriptRunner runJob(String pipeline,List<String> scriptArgs) { 
         if( !pipeline )
             throw new AbortOperationException("No project name was specified")
 
@@ -293,8 +300,7 @@ class CmdRun extends CmdBase implements HubOptions {
         // -- add this run to the local history
         runner.verifyAndTrackHistory(launcher.cliString, runName)
 
-        // -- run it!
-        runner.execute(scriptArgs, this.entryName)
+        return runner;
     }
 
     protected void checkRunName() {

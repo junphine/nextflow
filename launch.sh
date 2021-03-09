@@ -43,7 +43,7 @@ base_dir=$bin_dir
 
 # define the java env
 JAVA_BIN=java
-if test -n "$JAVA_HOME"; then
+if test -n "$JAVA_HOME_"; then
 	JAVA_BIN="$JAVA_HOME/bin/java"
 fi
 

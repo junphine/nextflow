@@ -25,7 +25,7 @@ import nextflow.processor.TaskContext
 import nextflow.processor.TaskRun
 import nextflow.util.InputStreamDeserializer
 import nextflow.util.RemoteSession
-import org.apache.commons.lang.SerializationUtils
+import org.apache.commons.lang3.SerializationUtils
 import org.apache.ignite.IgniteCache
 import org.apache.ignite.IgniteException
 /**

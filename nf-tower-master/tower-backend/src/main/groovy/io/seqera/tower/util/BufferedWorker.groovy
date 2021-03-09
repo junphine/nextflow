@@ -77,7 +77,7 @@ class BufferedWorker<T> {
     protected void main() {
         log.debug "run $name"
         boolean terminated = false
-        def buffer = newBuffer()
+        List<T> buffer = newBuffer()
         while(!terminated) {
             try {
                 final el = timeoutMillis ? events.poll(timeoutMillis,TimeUnit.MILLISECONDS) : events.take()
@@ -98,7 +98,7 @@ class BufferedWorker<T> {
             boolean trigger = (maxSize!=null && buffer.size()>=maxSize) || terminated
             if( buffer && trigger ) {
                 log.debug "Event emitting buffer=$buffer"
-                def copy = new ArrayList(buffer)
+                def copy = new ArrayList<T>(buffer)
                 buffer.clear()
                 if( executor )
                     executor.submit(safeRun(copy, doOnData))

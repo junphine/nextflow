@@ -29,8 +29,8 @@ import nextflow.ignite.IgnitePlugin
 import nextflow.scheduler.Protocol
 import nextflow.util.ClusterConfig
 import nextflow.util.Duration
-import org.apache.commons.lang.StringUtils
-import org.apache.commons.lang.reflect.MethodUtils
+import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3.reflect.MethodUtils
 import org.apache.ignite.Ignite
 import org.apache.ignite.Ignition
 import org.apache.ignite.cache.CacheMode

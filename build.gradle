@@ -19,31 +19,11 @@ plugins {
     id "io.codearte.nexus-staging" version "0.21.2"
     id 'java'
     id 'idea'
+	id 'maven'
+	id 'maven-publish'	
 }
 
-// Add ability to test with upcoming versions of Groovy
-def groovyVer = System.getenv('CI_GROOVY_VERSION')
-if (groovyVer) {
-    def repo = groovyVer.startsWith('com.github.apache:') ? 'https://jitpack.io' : 'https://oss.jfrog.org/oss-snapshot-local/'
-    logger.lifecycle "Overriden Groovy dependency to use $groovyVer - repository: $repo"
-    allprojects {
-        repositories {
-            maven { url repo }
-        }
 
-        configurations.all {
-            resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-                if (details.requested.group == 'org.codehaus.groovy') {
-                    if( groovyVer.contains(':') )
-                        details.useTarget(groovyVer)
-                    else
-                        details.useVersion(groovyVer)
-                    println ">> Overriding $details.requested with version: $groovyVer"
-                }
-            }
-        }
-    }
-}
 
 def projects(String...args) {
     args.collect {project(it)}
@@ -57,6 +37,7 @@ allprojects {
     apply plugin: 'java-test-fixtures'
     apply plugin: 'idea'
     apply plugin: 'groovy'
+	apply plugin: 'maven-publish'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -66,6 +47,7 @@ allprojects {
     }
 
     repositories {
+		mavenLocal()
         jcenter()
         mavenCentral()
         maven { url 'https://repo.eclipse.org/content/groups/releases' }
@@ -135,7 +117,8 @@ allprojects {
                     '--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED',
             ])
         }
-    }
+    }	
+	
 }
 
 // disable jar for root project
@@ -203,7 +186,7 @@ def getRuntimeConfigs() {
             .findAll { prj -> prj.name in ['nextflow','nf-commons','nf-https'] }
             .collect { it.name }
 
-    FileCollection result = null
+    def result = null
     for( def it : names ) {
         def cfg = project(it).configurations.getByName('runtime')
         if( result==null )
@@ -274,7 +257,8 @@ configure(coreProjects) {
         repositories {
             mavenDeployer {
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
+				mavenLocal()
+				
                 repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                     authentication(userName: nexusUsername, password: nexusPassword)
                 }
@@ -282,6 +266,7 @@ configure(coreProjects) {
                 snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
                     authentication(userName: nexusUsername, password: nexusPassword)
                 }
+                
 
                 pom.project {
                     name 'Nextflow'
@@ -358,6 +343,9 @@ nexusStaging {
     packageGroup = 'io.nextflow'
     delayBetweenRetriesInMillis = 10_000
 }
+
+
+
 
 if( System.env.BUILD_PACK ) {
     apply from: 'packing.gradle'

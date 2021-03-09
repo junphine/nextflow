@@ -81,6 +81,17 @@ class Launcher {
     Launcher() {
         init()
     }
+	
+	Launcher(boolean onlyRun) {
+		allCommands = (List<CmdBase>)[new CmdRun()]
+		options = new CliOptions()
+		jcommander = new JCommander(options)
+		allCommands.each { cmd ->
+			cmd.launcher = this;
+			jcommander.addCommand(cmd.name, cmd)
+		}
+		jcommander.setProgramName( APP_NAME )
+	}
 
     protected void init() {
         allCommands = (List<CmdBase>)[

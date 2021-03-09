@@ -428,10 +428,13 @@ class Session implements ISession {
         // -- abort session handler
         final abort_h = { Signal sig -> abort(new AbortSignalException(sig)) } as SignalHandler
 
+		boolean isWindows = System.getProperty("os.name").startsWith("Windows");
         // -- register handlers
         Signal.handle( new Signal("INT"), ctrl_c)
         Signal.handle( new Signal("TERM"), abort_h)
-        Signal.handle( new Signal("HUP"), abort_h)
+		if(true || !isWindows) {
+           Signal.handle( new Signal("HUP"), abort_h)
+		}
     }
 
     void addIgniter( Closure action )  {
@@ -621,7 +624,7 @@ class Session implements ISession {
             // -- close db
             cache?.close()
 
-            // -- shutdown plugins
+            // -- shutdown plugins dsiable@byron
             Plugins.stop()
 
             // -- cleanup script classes dir

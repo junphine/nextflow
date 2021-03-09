@@ -9,7 +9,8 @@
  * defined by the Mozilla Public License, v. 2.0.
  */
 
-rootProject.name = 'nf-tower'
+rootProject.name = 'nf-tower-server'
 
 include 'tower-web'
 include 'tower-backend'
+//include 'books-demo'

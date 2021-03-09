@@ -148,9 +148,11 @@ class PluginsFacade implements PluginStateListener {
     PluginManager getManager() { manager }
 
     synchronized void setup(Map config = Collections.emptyMap()) {
-        if( manager )
-            throw new IllegalArgumentException("Plugin system was already setup")
-        else {
+        if( manager ) {
+			//modify@byron
+            //throw new IllegalArgumentException("Plugin system was already setup")
+        }
+		else {
             log.debug "Setting up plugin manager > mode=${mode}; plugins-dir=$root"
             // make sure plugins dir exists
             if( mode!='dev' && !FilesEx.mkdirs(root) )

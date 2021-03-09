@@ -27,7 +27,7 @@ import nextflow.util.KryoHelper
 @EqualsAndHashCode
 class IgResultData implements Serializable {
 
-    private static final long serialVersionUID = - 7200781198107958188L ;
+    private static final long serialVersionUID = 0L ;
 
     /**
      * The closure returned value serialized as a byte array

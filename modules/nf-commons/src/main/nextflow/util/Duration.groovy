@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
 import groovy.transform.CompileStatic
 import groovy.transform.EqualsAndHashCode
 import groovy.util.logging.Slf4j
-import org.apache.commons.lang.time.DurationFormatUtils
+import org.apache.commons.lang3.time.DurationFormatUtils
 /**
  * A simple time duration representation
  *

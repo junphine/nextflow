@@ -11,6 +11,9 @@ micronaut:
   server:
     port: ${MICRONAUT_PORT:8080}
     netty:
+    cors:
+      enabled: true
+      
   caches:
     rate-limiter:
       expire-after-access: 10m
@@ -25,7 +28,7 @@ micronaut:
       jwt:
         enabled: true
         bearer:
-          enabled: false
+          enabled: true
         cookie:
           enabled: true
           loginSuccessTargetUrl: "/auth?success=true"
@@ -36,6 +39,16 @@ micronaut:
               secret: pleaseChangeThisSecretForANewOne
         generator:
           access-token-expiration: 86400
+          
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**        
+      
+      default:       
+        enabled: true      
+        paths: file:tower-web
+        mapping: /tower/**
 ---
 jackson:
   serialization:
@@ -67,13 +80,13 @@ grails:
     failOnError: false
 ---
 mail:
-  from: "${TOWER_CONTACT_EMAIL:hello@foo.com}"
+  from: "${TOWER_CONTACT_EMAIL:junphine@126.com}"
   smtp:
-    host: "${TOWER_SMTP_HOST:email-smtp.eu-west-1.amazonaws.com}"
-    port: "${TOWER_SMTP_PORT:587}"
+    host: "${TOWER_SMTP_HOST:smtp.126.com}"
+    port: "${TOWER_SMTP_PORT:25}"
     auth: "${TOWER_SMTP_AUTH:true}"
-    user: "${TOWER_SMTP_USER}"
-    password: "${TOWER_SMTP_PASSWORD}"
+    user: "${TOWER_SMTP_USER:junphine}"
+    password: "${TOWER_SMTP_PASSWORD:Byron@5199}"
     starttls:
       enable: true
       required: true
@@ -82,4 +95,10 @@ live:
   buffer:
     time: 5s
     count: 100
-    heartbeat: 50s
+    heartbeat: 60s
+    
+    
+---
+tower:
+  trustedEmails:
+    - '*@viewhigh.com'

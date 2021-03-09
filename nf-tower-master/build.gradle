@@ -8,9 +8,15 @@
  * This Source Code Form is "Incompatible With Secondary Licenses", as
  * defined by the Mozilla Public License, v. 2.0.
  */
-
+plugins {
+	id 'java'	
+}
 
 allprojects {
+	apply plugin: 'java'
     version "20.06.0"
     group "io.seqera"
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	
 }

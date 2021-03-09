@@ -43,7 +43,7 @@
     "ngx-bootstrap": "^5.5.0",
     "ngx-virtual-scroller": "^3.0.3",
     "popper.js": "^1.15.0",
-    "rxjs": "~6.6.2",
+    "rxjs": "~6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

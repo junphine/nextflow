@@ -20,7 +20,7 @@ package nextflow.util
 import groovy.transform.CompileStatic
 import groovy.transform.PackageScope
 import groovy.transform.ToString
-import org.apache.commons.lang.StringUtils
+import org.apache.commons.lang3.StringUtils
 /**
  * Simple comma-separated-values parser
  *

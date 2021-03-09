@@ -83,7 +83,9 @@ class BackpressureBuffer<T> {
     }
 
     void offer(T payload) {
-        eventQueue.add(payload)
+		//modify@byron
+        //-eventQueue.add(payload)
+		eventQueue.offer(payload)
     }
 
     BackpressureBuffer onNext( @ClosureParams(value= FromString, options=["List"]) Closure action) {
@@ -102,7 +104,7 @@ class BackpressureBuffer<T> {
             final event = eventQueue.poll(pollTimeout, TimeUnit.MILLISECONDS)
             // reconcile task events ie. send out only the last event
             if( event!=null ) {
-                buffer[event.hashCode()] = event
+                buffer.put(event.hashCode(),event)
                 log.trace "Taking event=$event -- buffer=$buffer"
             }
 

@@ -31,7 +31,7 @@ import nextflow.processor.TaskHandler
 import nextflow.processor.TaskId
 import nextflow.processor.TaskProcessor
 import nextflow.util.Duration
-import org.apache.commons.lang.StringEscapeUtils
+import org.apache.commons.lang3.StringEscapeUtils
 /**
  * Render pipeline timeline processes execution
  *
@@ -215,7 +215,7 @@ class TimelineObserver implements TraceObserver {
         final indent = "    ";
 
         template << indent << indent << '{'
-        template << "\"label\": \"${StringEscapeUtils.escapeJavaScript(name)}\", "
+        template << "\"label\": \"${StringEscapeUtils.escapeJava(name)}\", "
         template << "\"cached\": ${record.cached}, "
         template << "\"index\": $index, "
         template << "\"times\": ["
@@ -224,7 +224,7 @@ class TimelineObserver implements TraceObserver {
             template << "{\"starting_time\": $submit, \"ending_time\": $start}"
 
             if( start && realtime ) {
-                def label = StringEscapeUtils.escapeJavaScript(labelString(record))
+                def label = StringEscapeUtils.escapeJava(labelString(record))
                 def ending = start+realtime
                 template << ", {\"starting_time\": $start, \"ending_time\": $ending, \"label\": \"$label\"}"
 

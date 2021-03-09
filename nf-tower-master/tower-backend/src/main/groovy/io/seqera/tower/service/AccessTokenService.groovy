@@ -101,7 +101,8 @@ abstract class AccessTokenService {
         lastAccessUpdater
                 .toFlowable(BackpressureStrategy.LATEST)
                 .observeOn(Schedulers.computation())
-                .buffer(flushInterval.toMillis(), TimeUnit.MILLISECONDS)
+				//remove@byron
+                //-.buffer(flushInterval.toMillis(), TimeUnit.MILLISECONDS)
                 .subscribe(this.&flushLastAccessUpdates)
         return lastAccessUpdater
     }

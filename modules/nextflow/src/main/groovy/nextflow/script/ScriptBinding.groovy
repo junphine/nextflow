@@ -25,7 +25,7 @@ import groovy.transform.PackageScope
 import groovy.util.logging.Slf4j
 import nextflow.NF
 import nextflow.Session
-import org.apache.commons.lang.StringUtils
+import org.apache.commons.lang3.StringUtils
 /**
  * Defines the script execution context. By default provided the following variables
  * <li>{@code __$session}: the current execution session
