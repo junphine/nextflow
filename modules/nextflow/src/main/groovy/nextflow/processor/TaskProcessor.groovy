@@ -2128,8 +2128,7 @@ class TaskProcessor {
         }
 
         // increment the number of processes executed
-		//modify@byron
-        state.onMessage { StateObj it -> it.incCompleted() }
+        state.update { StateObj it -> it.incCompleted() }
     }
 
     protected void terminateProcess() {
@@ -2224,8 +2223,7 @@ class TaskProcessor {
         List<Object> beforeRun(final DataflowProcessor processor, final List<Object> messages) {
             log.trace "<${name}> Before run -- messages: ${messages}"
             // the counter must be incremented here, otherwise it won't be consistent
-			//modify@byron
-            state.onMessage { StateObj it -> it.incSubmitted() }
+            state.update { StateObj it -> it.incSubmitted() }
             return messages;
         }
 
@@ -2260,8 +2258,7 @@ class TaskProcessor {
             if( message == PoisonPill.instance ) {
                 log.trace "<${name}> Poison pill arrived; port: $index"
                 openPorts.set(index, 0) // mark the port as closed
-				//modify@byron
-                state.onMessage { StateObj it -> it.poison() }
+                state.update { StateObj it -> it.poison() }
             }
 
             return message

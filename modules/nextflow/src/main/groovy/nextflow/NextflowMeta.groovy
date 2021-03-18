@@ -3,6 +3,7 @@ package nextflow
 import java.text.SimpleDateFormat
 import java.util.regex.Pattern
 
+import groovy.transform.CompileStatic
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import groovy.util.logging.Slf4j
@@ -100,7 +101,7 @@ class NextflowMeta {
     }
 
     boolean isDsl2() {
-        preview.dsl == 2 || enable.dsl == 2
+        preview.dsl == 2 || enable.dsl == 2 
     }
 
     boolean isDsl2Final() {

@@ -1,7 +1,9 @@
 tower:
   appName: "${TOWER_APP_NAME:Nextflow Tower}"
-  serverUrl: "${TOWER_SERVER_URL:`http://localhost:8000`}"
+  serverUrl: "${TOWER_SERVER_URL:`http://localhost`}"
   contactEmail: "${TOWER_CONTACT_EMAIL:hello@foo.com}"
+
+
 ---
 micronaut:
   application:
@@ -9,7 +11,7 @@ micronaut:
     instance:
       id: ${random.shortuuid}
   server:
-    port: ${MICRONAUT_PORT:8080}
+    port: ${MICRONAUT_PORT:8000}
     netty:
     cors:
       enabled: true
@@ -39,13 +41,14 @@ micronaut:
               secret: pleaseChangeThisSecretForANewOne
         generator:
           access-token-expiration: 86400
-          
+  router:      
     static-resources:
       swagger:
+        enabled: true   
         paths: classpath:META-INF/swagger
         mapping: /swagger/**        
       
-      default:       
+      tower:       
         enabled: true      
         paths: file:tower-web
         mapping: /tower/**
@@ -96,9 +99,5 @@ live:
     time: 5s
     count: 100
     heartbeat: 60s
-    
-    
----
-tower:
-  trustedEmails:
-    - '*@viewhigh.com'
+
+

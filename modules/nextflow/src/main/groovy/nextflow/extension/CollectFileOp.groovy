@@ -19,6 +19,7 @@ package nextflow.extension
 
 import java.nio.file.Path
 
+import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import groovyx.gpars.dataflow.DataflowReadChannel
 import groovyx.gpars.dataflow.DataflowWriteChannel
@@ -80,7 +81,7 @@ class CollectFileOp {
         defineStoreDirAndFileName()
         defineHashingParams()
 
-        Global.onShutdown {
+        Global.session.onShutdown {
             // make sure to delete the collector on termination
             collector.safeClose()
         }

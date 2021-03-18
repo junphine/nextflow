@@ -54,6 +54,7 @@ import nextflow.processor.TaskFault
 import nextflow.processor.TaskHandler
 import nextflow.processor.TaskProcessor
 import nextflow.script.BaseScript
+import nextflow.script.ExecutionContext
 import nextflow.script.ProcessConfig
 import nextflow.script.ProcessFactory
 import nextflow.script.ScriptBinding
@@ -243,7 +244,8 @@ class Session implements ISession {
 
     AnsiLogObserver ansiLogObserver
 
-    FilePorter getFilePorter() { filePorter }
+    FilePorter getFilePorter() { filePorter }	
+	
 
     /**
      * Creates a new session with an 'empty' (default) configuration
@@ -432,7 +434,8 @@ class Session implements ISession {
         // -- register handlers
         Signal.handle( new Signal("INT"), ctrl_c)
         Signal.handle( new Signal("TERM"), abort_h)
-		if(true || !isWindows) {
+		if(!isWindows) {
+		   log.debug "Signal regisiter HUP."
            Signal.handle( new Signal("HUP"), abort_h)
 		}
     }
@@ -625,7 +628,7 @@ class Session implements ISession {
             cache?.close()
 
             // -- shutdown plugins dsiable@byron
-            Plugins.stop()
+            //-Plugins.stop()
 
             // -- cleanup script classes dir
             classesDir.deleteDir()
@@ -1340,5 +1343,10 @@ class Session implements ISession {
         }
 
         return pool
-    }
+    }	
+	
+	//add@byron move from WorkflowBinding
+	final Map<Object,String> lookupTable = new HashMap<>()
+	
+	final List<ExecutionContext> stack = new ArrayList<>()
 }

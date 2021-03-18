@@ -20,6 +20,7 @@ package nextflow.script
 import groovy.transform.CompileStatic
 import groovy.transform.PackageScope
 import groovy.util.logging.Slf4j
+import nextflow.Global
 import nextflow.exception.IllegalInvocationException
 import nextflow.extension.OpCall
 import nextflow.extension.OperatorEx
@@ -33,13 +34,14 @@ import nextflow.extension.OperatorEx
 @CompileStatic
 class WorkflowBinding extends Binding  {
 
-    static Map<Object,String> lookupTable = new HashMap<>()
-
     static String lookup(Object value) {
-        return lookupTable.get(value)
+		if(!Global.session) return null;
+        return Global.session.lookupTable.get(value)
     }
 
-    static void init() { lookupTable.clear() }
+    static void init() { 
+		//Global.session.lookupTable.clear()
+	}
 
     private BaseScript owner
 
@@ -105,7 +107,10 @@ class WorkflowBinding extends Binding  {
 
     @Override
     void setVariable(String name, Object value) {
-        lookupTable.put(value, name)
+		if(Global.session) {
+		  Map<Object,String> lookupTable = Global.session.lookupTable
+          lookupTable.put(value, name)
+		}
         super.setVariable(name, value)
     }
 

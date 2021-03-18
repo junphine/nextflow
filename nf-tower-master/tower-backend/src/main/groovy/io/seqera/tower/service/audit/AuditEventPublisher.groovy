@@ -45,7 +45,8 @@ class AuditEventPublisher {
     @Value('${tower.server-url}')
     String serverUrl
 
-    @Inject SecurityService securityService
+    @Inject 
+	SecurityService securityService
     @Inject ApplicationEventPublisher eventPublisher
     @Inject HttpClientAddressResolver addressResolver
     @Inject MailService mailService

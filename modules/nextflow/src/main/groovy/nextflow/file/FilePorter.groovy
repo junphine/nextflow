@@ -239,7 +239,7 @@ class FilePorter {
         }
 
         @Override
-        void run() throws Exception {
+        void run() {
             stageForeignFile(source, target)
         }
 

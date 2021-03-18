@@ -75,6 +75,11 @@ class SysHelper {
      * @throws IllegalStateException If the {@code uptime} command return a non-zero exit status
      */
     static String getUptimeText() throws IllegalStateException {
+		//add@byron
+		boolean isWindows = System.getProperty("os.name").startsWith("Windows");
+		if(isWindows) {
+		  return "19:33:10 up 0 min,  0 users,  load average: 0.52, 0.58, 0.59"
+		}
 
         def proc = new ProcessBuilder('uptime').start()
         def status = proc.waitFor()

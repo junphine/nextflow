@@ -19,6 +19,7 @@ package nextflow
 
 import java.nio.file.Path
 
+
 /**
  * Nextflow session interface
  *
@@ -64,5 +65,10 @@ interface ISession {
     boolean isCacheable()
 
     boolean isResumeMode()
+	
+	//add@byron
+	Map<Object,String> getLookupTable()
+	
+	List<Object> getStack()
 
 }

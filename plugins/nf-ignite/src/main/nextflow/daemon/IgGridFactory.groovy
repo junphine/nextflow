@@ -102,8 +102,8 @@ class IgGridFactory {
         try {
             final plgLdr = IgnitePlugin.class.getClassLoader()
             log.debug "+ Setting context class loader to=$plgLdr - previous=$oldLdr"
-            Thread.currentThread().setContextClassLoader(plgLdr)
-            Ignition.start( config() )
+            Thread.currentThread().setContextClassLoader(plgLdr)			
+            Ignition.getOrStart( config() )
         }
         finally {
             Thread.currentThread().setContextClassLoader(oldLdr)

@@ -10,13 +10,13 @@ micronaut:
 ---
 dataSource:
   pooled: true
-  dbCreate: "${DB_CREATE:update}"
-  url: "jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/tower"
-  driverClassName: "${DB_DRIVER:com.mysql.cj.jdbc.Driver}"
-  username: "${DB_USER:tower}"
-  password: "${DB_PASSWORD:tower}"
+  dbCreate: "${TOWER_DB_CREATE:`update`}"
+  url: "${TOWER_DB_URL:`jdbc:h2:file:./.db/h2/tower`}"
+  driverClassName: "${TOWER_DB_DRIVER:`org.h2.Driver`}"
+  username: "${TOWER_DB_USER:`sa`}"
+  password: "${TOWER_DB_PASSWORD:``}"
 hibernate:
-  dialect: "${DB_DIALECT:org.hibernate.dialect.MySQL55Dialect}"
+  dialect: "${DB_DIALECT:org.hibernate.dialect.H2Dialect}"
 ---
 mail:
   from: noreply@salenda.net

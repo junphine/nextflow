@@ -19,6 +19,7 @@ package nextflow
 import java.nio.file.Path
 import java.nio.file.Paths
 
+import groovy.transform.CompileStatic
 import groovy.transform.PackageScope
 import groovy.util.logging.Slf4j
 import nextflow.util.Duration
@@ -31,12 +32,14 @@ import org.apache.commons.lang3.StringUtils
  * @author Paolo Di Tommaso <paolo.ditommaso@gmail.com>
  */
 @Slf4j
+//@CompileStatic
 class Global {
-
+    
     /**
-     * The pipeline session instance
+     * The pipeline session instance modify@byron use InheritableThreadLocal
      */
-    static private ISession session
+	static private ThreadLocal<ISession> local = new InheritableThreadLocal<>()
+    //static private ISession _session
 
     /**
      * The main configuration object
@@ -47,7 +50,8 @@ class Global {
      * @return The object instance representing the current session
      */
     static ISession getSession() {
-        session
+        def sess = local.get()
+		return sess//?sess:_session		
     }
 
     /**
@@ -56,7 +60,8 @@ class Global {
      * @param value An object instance representing the current session
      */
     static void setSession( ISession value ) {
-        session = value
+        //_session = value
+		local.set(value)
     }
 
     /**

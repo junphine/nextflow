@@ -38,6 +38,10 @@ dependencies {
     testImplementation(testFixtures(project(":nextflow")))
 }
 
+java {
+	//withSourcesJar()
+}
+
 publishing {
 	publications {
 		maven(MavenPublication) {

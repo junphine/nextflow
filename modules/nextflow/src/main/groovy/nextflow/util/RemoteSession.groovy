@@ -150,7 +150,8 @@ class RemoteSession implements Serializable, Closeable {
         while( (entry=zip.getNextEntry()) != null ) {
 
             def file = target.resolve(entry.getName());
-            if(entry.isDirectory()) {
+			//modify@byron
+            if(entry.isDirectory() || entry.getName().endsWith('\\')) {
                 continue
             }
 

@@ -31,14 +31,15 @@ import nextflow.Session
 @CompileStatic
 class ExecutionStack {
 
-    static private List<ExecutionContext> stack = new ArrayList<>()
+    //-static private List<ExecutionContext> stack = new ArrayList<>()
 
     static ExecutionContext current() {
+		def stack = (Global.session as Session).stack
         stack ? stack.get(0) : null
     }
 
     static boolean withinWorkflow() {
-        for( def entry : stack ) {
+        for( def entry : Global.session.stack ) {
             if( entry instanceof WorkflowDef )
                 return true
         }
@@ -46,10 +47,12 @@ class ExecutionStack {
     }
 
     static WorkflowBinding binding() {
+		def stack = (Global.session as Session).stack
         stack ? current().getBinding() : (Global.session as Session).getBinding()
     }
 
     static BaseScript script() {
+		def stack = (Global.session as Session).stack
         for( def item in stack ) {
             if( item instanceof BaseScript )
                 return item
@@ -72,20 +75,23 @@ class ExecutionStack {
     }
 
     static void push(ExecutionContext script) {
+		def stack = (Global.session as Session).stack
         stack.push(script)
     }
 
     static ExecutionContext pop() {
+		def stack = (Global.session as Session).stack
         stack.pop()
     }
 
     static int size() {
+		def stack = Global.session.stack
         stack.size()
     }
 
     @PackageScope
     static void reset() {
-        stack = new ArrayList<>()
+		Global.session.stack.clear();
     }
 
 }
